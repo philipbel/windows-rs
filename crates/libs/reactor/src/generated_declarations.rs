@@ -421,6 +421,26 @@ impl SplitViewDisplayMode {
 }
 #[non_exhaustive]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum SplitViewPanePlacement {
+    Left,
+    Right,
+}
+impl SplitViewPanePlacement {
+    pub(crate) fn property_value(self) -> PropertyValue {
+        match self {
+            Self::Left => PropertyValue::Enum {
+                kind: "SplitViewPanePlacement",
+                variant: "Left",
+            },
+            Self::Right => PropertyValue::Enum {
+                kind: "SplitViewPanePlacement",
+                variant: "Right",
+            },
+        }
+    }
+}
+#[non_exhaustive]
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Stretch {
     None,
     Fill,
@@ -4047,6 +4067,12 @@ impl SplitView {
         self.0 = self
             .0
             .property(PropertyId::IsPaneOpen, PropertyValue::Bool(is_pane_open));
+        self
+    }
+    pub fn pane_placement(mut self, pane_placement: SplitViewPanePlacement) -> Self {
+        self.0 = self
+            .0
+            .property(PropertyId::PanePlacement, pane_placement.property_value());
         self
     }
     visual_methods!();

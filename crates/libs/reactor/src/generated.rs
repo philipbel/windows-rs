@@ -208,6 +208,7 @@ pub enum PropertyId {
     Orientation,
     Padding,
     PaneDisplayMode,
+    PanePlacement,
     PaneTitle,
     Password,
     PasswordRevealMode,
@@ -1681,6 +1682,13 @@ pub fn property_contract(kind: ObjectType, id: PropertyId) -> Option<PropertyCon
             id,
             value: ValueType::Bool,
         }),
+        (ObjectType::SplitView, PropertyId::PanePlacement) => Some(PropertyContract {
+            id,
+            value: ValueType::Enum {
+                kind: "SplitViewPanePlacement",
+                variants: &["Left", "Right"],
+            },
+        }),
         (ObjectType::ProgressBar, PropertyId::Minimum) => Some(PropertyContract {
             id,
             value: ValueType::F64,
@@ -2599,6 +2607,7 @@ pub(crate) fn property_order(kind: ObjectType, id: PropertyId) -> usize {
         (ObjectType::SplitView, PropertyId::CompactPaneLength) => 30,
         (ObjectType::SplitView, PropertyId::DisplayMode) => 31,
         (ObjectType::SplitView, PropertyId::IsPaneOpen) => 32,
+        (ObjectType::SplitView, PropertyId::PanePlacement) => 33,
         (ObjectType::ProgressBar, PropertyId::Minimum) => 29,
         (ObjectType::ProgressBar, PropertyId::Maximum) => 30,
         (ObjectType::ProgressBar, PropertyId::Value) => 31,
@@ -2955,6 +2964,7 @@ pub(crate) const ALL_PROPERTY_IDS: &[PropertyId] = &[
     PropertyId::Orientation,
     PropertyId::Padding,
     PropertyId::PaneDisplayMode,
+    PropertyId::PanePlacement,
     PropertyId::PaneTitle,
     PropertyId::Password,
     PropertyId::PasswordRevealMode,

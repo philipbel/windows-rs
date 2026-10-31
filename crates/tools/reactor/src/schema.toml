@@ -945,6 +945,9 @@ name = "DisplayMode"
 name = "IsPaneOpen"
 controlled = "PaneClosed"
 
+[[objects.properties]]
+name = "PanePlacement"
+
 [[objects.relations]]
 name = "Pane"
 

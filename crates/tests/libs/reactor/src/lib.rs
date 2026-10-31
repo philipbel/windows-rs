@@ -21,6 +21,7 @@ mod repeater;
 mod retirement;
 mod selection;
 mod smoke;
+mod split_view;
 mod surface;
 mod tab;
 mod text;
@@ -327,6 +328,7 @@ pub fn run(fixture: &str) -> windows_core::Result<()> {
         "selection" => App::run_component::<selection::SelectionFixture>(())?,
         "selection-index" => App::run_component::<selection::IndexSelectionFixture>(())?,
         "selection-items" => App::run_component::<selection::ItemSelectionFixture>(())?,
+        "split-view" => App::run_component::<split_view::SplitViewFixture>(())?,
         "tab" => App::run_component::<tab::TabFixture>(())?,
         "timer" => App::run_component::<timer::TimerFixture>(())?,
         "tree" => App::run_component::<tree::TreeFixture>(())?,

@@ -204,6 +204,8 @@ Microsoft::UI::Xaml::Controls::SelectorBarItem::CreateInstance
 Microsoft::UI::Xaml::Controls::Slider::CreateInstance
 Microsoft::UI::Xaml::Controls::SplitButton::CreateInstance
 Microsoft::UI::Xaml::Controls::SplitView::CreateInstance
+Microsoft::UI::Xaml::Controls::SplitViewDisplayMode
+Microsoft::UI::Xaml::Controls::SplitViewPanePlacement
 Microsoft::UI::Xaml::Controls::StackPanel::CreateInstance
 Microsoft::UI::Xaml::Controls::SwapChainPanel::CreateInstance
 Microsoft::UI::Xaml::Controls::SymbolIcon::CreateInstance

@@ -3125,6 +3125,9 @@ impl GeneratedHandle {
             (ObjectType::SplitView, PropertyId::IsPaneOpen) => {
                 (native::SplitView::IsPaneOpenProperty, Conversion::Value)
             }
+            (ObjectType::SplitView, PropertyId::PanePlacement) => {
+                (native::SplitView::PanePlacementProperty, Conversion::Value)
+            }
             (ObjectType::ProgressBar, PropertyId::Minimum) => {
                 (native::RangeBase::MinimumProperty, Conversion::Value)
             }
@@ -3635,6 +3638,12 @@ impl GeneratedHandle {
                 "Inline" => native::SplitViewDisplayMode::Inline,
                 "CompactOverlay" => native::SplitViewDisplayMode::CompactOverlay,
                 "CompactInline" => native::SplitViewDisplayMode::CompactInline,
+                _ => unreachable!("validated enum variant"),
+            })
+            .into(),
+            "SplitViewPanePlacement" => windows_reference::IReference::from(match variant {
+                "Left" => native::SplitViewPanePlacement::Left,
+                "Right" => native::SplitViewPanePlacement::Right,
                 _ => unreachable!("validated enum variant"),
             })
             .into(),

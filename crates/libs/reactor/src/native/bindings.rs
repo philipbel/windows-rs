@@ -16730,7 +16730,10 @@ pub struct ISplitViewStatics_Vtbl {
         *mut core::ffi::c_void,
         *mut *mut core::ffi::c_void,
     ) -> windows_core::HRESULT,
-    PanePlacementProperty: usize,
+    pub PanePlacementProperty: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
     pub DisplayModeProperty: unsafe extern "system" fn(
         *mut core::ffi::c_void,
         *mut *mut core::ffi::c_void,
@@ -27504,6 +27507,16 @@ impl SplitView {
             .and_then(|| windows_core::imp::Type::from_abi(result__))
         })
     }
+    pub(crate) fn PanePlacementProperty() -> windows_core::Result<DependencyProperty> {
+        Self::ISplitViewStatics(|this| unsafe {
+            let mut result__ = core::mem::zeroed();
+            (windows_core::Interface::vtable(this).PanePlacementProperty)(
+                windows_core::Interface::as_raw(this),
+                &mut result__,
+            )
+            .and_then(|| windows_core::imp::Type::from_abi(result__))
+        })
+    }
     pub(crate) fn DisplayModeProperty() -> windows_core::Result<DependencyProperty> {
         Self::ISplitViewStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
@@ -27563,6 +27576,21 @@ impl windows_core::imp::TypeKind for SplitViewDisplayMode {
 impl windows_core::RuntimeType for SplitViewDisplayMode {
     const SIGNATURE: windows_core::imp::ConstBuffer = windows_core::imp::ConstBuffer::from_slice(
         b"enum(Microsoft.UI.Xaml.Controls.SplitViewDisplayMode;i4)",
+    );
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct SplitViewPanePlacement(pub i32);
+impl SplitViewPanePlacement {
+    pub const Left: Self = Self(0);
+    pub const Right: Self = Self(1);
+}
+impl windows_core::imp::TypeKind for SplitViewPanePlacement {
+    type TypeKind = windows_core::imp::CopyType;
+}
+impl windows_core::RuntimeType for SplitViewPanePlacement {
+    const SIGNATURE: windows_core::imp::ConstBuffer = windows_core::imp::ConstBuffer::from_slice(
+        b"enum(Microsoft.UI.Xaml.Controls.SplitViewPanePlacement;i4)",
     );
 }
 #[repr(transparent)]

@@ -36,6 +36,7 @@ mod repeater;
 mod retirement;
 mod selection;
 mod smoke;
+mod split_view;
 mod surface;
 mod tab;
 mod text;
