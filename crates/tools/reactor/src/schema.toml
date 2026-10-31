@@ -1484,6 +1484,12 @@ controlled = "SelectionChanged"
 indexes = "TabItems"
 
 [[objects.relations]]
+name = "TabStripHeader"
+
+[[objects.relations]]
+name = "TabStripFooter"
+
+[[objects.relations]]
 name = "TabItems"
 identity = "Keyed"
 

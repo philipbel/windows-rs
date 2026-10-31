@@ -17421,6 +17421,30 @@ impl windows_core::RuntimeType for ITabView {
         windows_core::imp::ConstBuffer::for_interface::<Self>();
 }
 impl ITabView {
+    pub(crate) fn SetTabStripHeader<P0>(&self, value: P0) -> windows_core::Result<()>
+    where
+        P0: windows_core::Param<windows_core::IInspectable>,
+    {
+        unsafe {
+            (windows_core::Interface::vtable(self).SetTabStripHeader)(
+                windows_core::Interface::as_raw(self),
+                value.param().abi(),
+            )
+            .ok()
+        }
+    }
+    pub(crate) fn SetTabStripFooter<P0>(&self, value: P0) -> windows_core::Result<()>
+    where
+        P0: windows_core::Param<windows_core::IInspectable>,
+    {
+        unsafe {
+            (windows_core::Interface::vtable(self).SetTabStripFooter)(
+                windows_core::Interface::as_raw(self),
+                value.param().abi(),
+            )
+            .ok()
+        }
+    }
     pub(crate) fn TabCloseRequested<F>(
         &self,
         handler: F,
@@ -17578,11 +17602,17 @@ pub struct ITabView_Vtbl {
     CloseButtonOverlayMode: usize,
     SetCloseButtonOverlayMode: usize,
     TabStripHeader: usize,
-    SetTabStripHeader: usize,
+    pub SetTabStripHeader: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
     TabStripHeaderTemplate: usize,
     SetTabStripHeaderTemplate: usize,
     TabStripFooter: usize,
-    SetTabStripFooter: usize,
+    pub SetTabStripFooter: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
     TabStripFooterTemplate: usize,
     SetTabStripFooterTemplate: usize,
     IsAddTabButtonVisible: usize,
@@ -17690,6 +17720,10 @@ impl ITabViewItem {
 #[repr(C)]
 pub struct ITabViewItem_Vtbl {
     pub base__: windows_core::IInspectable_Vtbl,
+    Header: usize,
+    SetHeader: usize,
+    HeaderTemplate: usize,
+    SetHeaderTemplate: usize,
     IconSource: usize,
     pub SetIconSource: unsafe extern "system" fn(
         *mut core::ffi::c_void,

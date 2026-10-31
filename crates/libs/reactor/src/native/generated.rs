@@ -5803,6 +5803,20 @@ impl GeneratedHandle {
                         None => object.SetContent(None::<&IInspectable>).map_err(Into::into),
                     }),
             ),
+            (Self::TabView(object), RelationId::TabStripHeader) => Some(match child {
+                Some(child) => object.value.SetTabStripHeader(child).map_err(Into::into),
+                None => object
+                    .value
+                    .SetTabStripHeader(None::<&IInspectable>)
+                    .map_err(Into::into),
+            }),
+            (Self::TabView(object), RelationId::TabStripFooter) => Some(match child {
+                Some(child) => object.value.SetTabStripFooter(child).map_err(Into::into),
+                None => object
+                    .value
+                    .SetTabStripFooter(None::<&IInspectable>)
+                    .map_err(Into::into),
+            }),
             (Self::TabViewItem(object), RelationId::Content) => Some(
                 object
                     .cast::<native::IContentControl>()

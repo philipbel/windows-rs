@@ -139,7 +139,7 @@ Microsoft::UI::Xaml::Controls::ISplitView::{add_PaneClosed, get_IsPaneOpen, put_
 Microsoft::UI::Xaml::Controls::ISwapChainPanel::{add_CompositionScaleChanged, get_CompositionScaleX, get_CompositionScaleY, remove_CompositionScaleChanged}
 Microsoft::UI::Xaml::Controls::ISymbolIcon::put_Symbol
 Microsoft::UI::Xaml::Controls::ISymbolIconSource::put_Symbol
-Microsoft::UI::Xaml::Controls::ITabView::{add_AddTabButtonClick, add_SelectionChanged, add_TabCloseRequested, add_TabItemsChanged, get_SelectedIndex, get_TabItems, remove_AddTabButtonClick, remove_SelectionChanged, remove_TabCloseRequested, remove_TabItemsChanged}
+Microsoft::UI::Xaml::Controls::ITabView::{add_AddTabButtonClick, add_SelectionChanged, add_TabCloseRequested, add_TabItemsChanged, get_SelectedIndex, get_TabItems, put_TabStripFooter, put_TabStripHeader, remove_AddTabButtonClick, remove_SelectionChanged, remove_TabCloseRequested, remove_TabItemsChanged}
 Microsoft::UI::Xaml::Controls::ITabViewItem::put_IconSource
 Microsoft::UI::Xaml::Controls::ITabViewTabCloseRequestedEventArgs::get_Tab
 Microsoft::UI::Xaml::Controls::ITeachingTip::{add_ActionButtonClick, add_Closed, get_IsOpen, remove_ActionButtonClick, remove_Closed}

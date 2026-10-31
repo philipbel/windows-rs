@@ -291,6 +291,8 @@ pub enum RelationId {
     Roots,
     SecondaryCommands,
     TabItems,
+    TabStripFooter,
+    TabStripHeader,
 }
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub enum EventId {
@@ -3616,14 +3618,32 @@ pub fn relation_contracts(kind: ObjectType) -> &'static [RelationContract] {
             realization: Realization::Owned,
         }],
         ObjectType::SelectorBarItem => &[],
-        ObjectType::TabView => &[RelationContract {
-            id: RelationId::TabItems,
-            child: ObjectCategory::Visual,
-            allowed_objects: &[],
-            cardinality: Cardinality::Many,
-            identity: Identity::Keyed,
-            realization: Realization::Owned,
-        }],
+        ObjectType::TabView => &[
+            RelationContract {
+                id: RelationId::TabStripHeader,
+                child: ObjectCategory::Visual,
+                allowed_objects: &[],
+                cardinality: Cardinality::One,
+                identity: Identity::Positional,
+                realization: Realization::Owned,
+            },
+            RelationContract {
+                id: RelationId::TabStripFooter,
+                child: ObjectCategory::Visual,
+                allowed_objects: &[],
+                cardinality: Cardinality::One,
+                identity: Identity::Positional,
+                realization: Realization::Owned,
+            },
+            RelationContract {
+                id: RelationId::TabItems,
+                child: ObjectCategory::Visual,
+                allowed_objects: &[],
+                cardinality: Cardinality::Many,
+                identity: Identity::Keyed,
+                realization: Realization::Owned,
+            },
+        ],
         ObjectType::TabViewItem => &[RelationContract {
             id: RelationId::Content,
             child: ObjectCategory::Visual,

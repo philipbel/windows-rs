@@ -5715,6 +5715,32 @@ impl TabView {
     ///
     /// ```compile_fail
     /// use windows_reactor::*;
+    /// let _ = TabView::new().tab_strip_header(TreeNode::new("node", "Node"));
+    /// ```
+    pub fn tab_strip_header(mut self, content: impl Into<View>) -> Self {
+        self.0 = self.0.relation(
+            RelationId::TabStripHeader,
+            RelationValue::One(Some(Rc::new(content.into().0))),
+        );
+        self
+    }
+    /// Rejects values outside this relation's generated type contract.
+    ///
+    /// ```compile_fail
+    /// use windows_reactor::*;
+    /// let _ = TabView::new().tab_strip_footer(TreeNode::new("node", "Node"));
+    /// ```
+    pub fn tab_strip_footer(mut self, content: impl Into<View>) -> Self {
+        self.0 = self.0.relation(
+            RelationId::TabStripFooter,
+            RelationValue::One(Some(Rc::new(content.into().0))),
+        );
+        self
+    }
+    /// Rejects values outside this relation's generated type contract.
+    ///
+    /// ```compile_fail
+    /// use windows_reactor::*;
     /// let _ = TabView::new().tab_items([TreeNode::new("node", "Node")]);
     /// ```
     pub fn tab_items(mut self, children: impl IntoViews) -> Self {
