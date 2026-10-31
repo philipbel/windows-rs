@@ -2224,6 +2224,10 @@ pub fn property_contract(kind: ObjectType, id: PropertyId) -> Option<PropertyCon
             id,
             value: ValueType::String,
         }),
+        (ObjectType::TabViewItem, PropertyId::IconSource) => Some(PropertyContract {
+            id,
+            value: ValueType::Icon,
+        }),
         (ObjectType::TeachingTip, PropertyId::Title) => Some(PropertyContract {
             id,
             value: ValueType::String,
@@ -2717,6 +2721,7 @@ pub(crate) fn property_order(kind: ObjectType, id: PropertyId) -> usize {
         (ObjectType::TabViewItem, PropertyId::IsClosable) => 29,
         (ObjectType::TabViewItem, PropertyId::Header) => 30,
         (ObjectType::TabViewItem, PropertyId::Tag) => 31,
+        (ObjectType::TabViewItem, PropertyId::IconSource) => 32,
         (ObjectType::TeachingTip, PropertyId::Title) => 29,
         (ObjectType::TeachingTip, PropertyId::Subtitle) => 30,
         (ObjectType::TeachingTip, PropertyId::IsOpen) => 31,

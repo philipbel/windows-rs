@@ -17673,9 +17673,28 @@ impl windows_core::RuntimeType for ITabViewItem {
     const SIGNATURE: windows_core::imp::ConstBuffer =
         windows_core::imp::ConstBuffer::for_interface::<Self>();
 }
+impl ITabViewItem {
+    pub(crate) fn SetIconSource<P0>(&self, value: P0) -> windows_core::Result<()>
+    where
+        P0: windows_core::Param<IconSource>,
+    {
+        unsafe {
+            (windows_core::Interface::vtable(self).SetIconSource)(
+                windows_core::Interface::as_raw(self),
+                value.param().abi(),
+            )
+            .ok()
+        }
+    }
+}
 #[repr(C)]
 pub struct ITabViewItem_Vtbl {
     pub base__: windows_core::IInspectable_Vtbl,
+    IconSource: usize,
+    pub SetIconSource: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
 }
 windows_core::imp::define_interface!(
     ITabViewItemFactory,

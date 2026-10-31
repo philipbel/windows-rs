@@ -5809,6 +5809,12 @@ impl TabViewItem {
         );
         self
     }
+    pub fn icon(mut self, icon: impl Into<Icon>) -> Self {
+        self.0 = self
+            .0
+            .property(PropertyId::IconSource, PropertyValue::Icon(icon.into()));
+        self
+    }
     visual_methods!();
     /// Rejects values outside this relation's generated type contract.
     ///

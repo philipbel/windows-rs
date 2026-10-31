@@ -1519,6 +1519,11 @@ adapter = "inspectable_string"
 name = "Tag"
 adapter = "inspectable_string"
 
+[[objects.properties]]
+name = "IconSource"
+method = "icon"
+adapter = "icon_source"
+
 [[objects.relations]]
 name = "Content"
 

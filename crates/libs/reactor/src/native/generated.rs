@@ -4524,6 +4524,19 @@ impl GeneratedHandle {
                         .and_then(|icon| object.SetIcon(&icon).map_err(Into::into)),
                 )
             }
+            (Self::TabViewItem(object), PropertyId::IconSource, None) => Some(
+                object
+                    .SetIconSource(None::<&native::IconSource>)
+                    .map_err(Into::into),
+            ),
+            (
+                Self::TabViewItem(object),
+                PropertyId::IconSource,
+                Some(PropertyValue::Icon(value)),
+            ) => Some(
+                icon_source(value, image)
+                    .and_then(|icon| object.SetIconSource(&icon).map_err(Into::into)),
+            ),
             (Self::AppBarButton(object), PropertyId::Icon, None) => Some(
                 object
                     .value
