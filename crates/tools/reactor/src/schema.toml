@@ -1584,6 +1584,15 @@ identity = "Keyed"
 name = "SecondaryCommands"
 identity = "Keyed"
 
+[[objects.properties]]
+name = "DefaultLabelPosition"
+
+[[objects.properties]]
+name = "OverflowButtonVisibility"
+
+[[objects.properties]]
+name = "ClosedDisplayMode"
+
 [[objects]]
 name = "AppBarButton"
 enabled = true

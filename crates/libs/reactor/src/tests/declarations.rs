@@ -1322,3 +1322,80 @@ fn generated_controls_cover_distinct_native_value_and_relation_shapes() {
         }]
     );
 }
+
+#[test]
+fn command_bar_flags_set_update_and_clear_independently() {
+    let mut runtime = Runtime::new(RecordingAdapter::default());
+    let view = CommandBar::new()
+        .default_label_position(CommandBarDefaultLabelPosition::Collapsed)
+        .overflow_button_visibility(CommandBarOverflowButtonVisibility::Visible)
+        .closed_display_mode(AppBarClosedDisplayMode::Hidden);
+    runtime.update(view.clone());
+    let root = runtime.graph().root().unwrap();
+    assert_eq!(
+        runtime.graph().properties(root).unwrap(),
+        [
+            Property {
+                id: PropertyId::DefaultLabelPosition,
+                value: CommandBarDefaultLabelPosition::Collapsed.property_value(),
+            },
+            Property {
+                id: PropertyId::OverflowButtonVisibility,
+                value: CommandBarOverflowButtonVisibility::Visible.property_value(),
+            },
+            Property {
+                id: PropertyId::ClosedDisplayMode,
+                value: AppBarClosedDisplayMode::Hidden.property_value(),
+            },
+        ]
+    );
+    assert!(runtime.update(view).is_empty());
+
+    let mutations = runtime.update(
+        CommandBar::new()
+            .default_label_position(CommandBarDefaultLabelPosition::Right)
+            .overflow_button_visibility(CommandBarOverflowButtonVisibility::Collapsed)
+            .closed_display_mode(AppBarClosedDisplayMode::Minimal),
+    );
+    assert_eq!(mutations.len(), 1);
+    let Mutation::SetProperties { object, set, clear } = &mutations[0] else {
+        panic!("expected property mutation");
+    };
+    assert_eq!(*object, root);
+    assert_eq!(
+        set.as_ref(),
+        [
+            Property {
+                id: PropertyId::DefaultLabelPosition,
+                value: CommandBarDefaultLabelPosition::Right.property_value(),
+            },
+            Property {
+                id: PropertyId::OverflowButtonVisibility,
+                value: CommandBarOverflowButtonVisibility::Collapsed.property_value(),
+            },
+            Property {
+                id: PropertyId::ClosedDisplayMode,
+                value: AppBarClosedDisplayMode::Minimal.property_value(),
+            },
+        ]
+    );
+    assert!(clear.is_empty());
+
+    let mutations = runtime
+        .update(CommandBar::new().default_label_position(CommandBarDefaultLabelPosition::Right));
+    assert_eq!(mutations.len(), 1);
+    assert!(matches!(
+        &mutations[0],
+        Mutation::SetProperties { object, set, clear }
+            if *object == root && set.is_empty() && clear.as_ref() == [PropertyId::OverflowButtonVisibility, PropertyId::ClosedDisplayMode]
+    ));
+    let mutations = runtime.update(CommandBar::new());
+    assert_eq!(mutations.len(), 1);
+    assert!(matches!(
+        &mutations[0],
+        Mutation::SetProperties { object, set, clear }
+            if *object == root && set.is_empty() && clear.as_ref() == [PropertyId::DefaultLabelPosition]
+    ));
+    assert_eq!(runtime.graph().root(), Some(root));
+    assert!(runtime.graph().properties(root).unwrap().is_empty());
+}

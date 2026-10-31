@@ -38,6 +38,25 @@ windows_core::imp::required_hierarchy!(
     UIElement,
     DependencyObject
 );
+impl AppBar {
+    pub(crate) fn ClosedDisplayModeProperty() -> windows_core::Result<DependencyProperty> {
+        Self::IAppBarStatics(|this| unsafe {
+            let mut result__ = core::mem::zeroed();
+            (windows_core::Interface::vtable(this).ClosedDisplayModeProperty)(
+                windows_core::Interface::as_raw(this),
+                &mut result__,
+            )
+            .and_then(|| windows_core::imp::Type::from_abi(result__))
+        })
+    }
+    fn IAppBarStatics<R, F: FnOnce(&IAppBarStatics) -> windows_core::Result<R>>(
+        callback: F,
+    ) -> windows_core::Result<R> {
+        static SHARED: windows_core::imp::FactoryCache<AppBar, IAppBarStatics> =
+            windows_core::imp::FactoryCache::new();
+        SHARED.call(callback)
+    }
+}
 impl windows_core::RuntimeType for AppBar {
     const SIGNATURE: windows_core::imp::ConstBuffer =
         windows_core::imp::ConstBuffer::for_class::<Self, IAppBar>();
@@ -132,6 +151,22 @@ impl windows_core::RuntimeName for AppBarButton {
 }
 unsafe impl Send for AppBarButton {}
 unsafe impl Sync for AppBarButton {}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct AppBarClosedDisplayMode(pub i32);
+impl AppBarClosedDisplayMode {
+    pub const Compact: Self = Self(0);
+    pub const Minimal: Self = Self(1);
+    pub const Hidden: Self = Self(2);
+}
+impl windows_core::imp::TypeKind for AppBarClosedDisplayMode {
+    type TypeKind = windows_core::imp::CopyType;
+}
+impl windows_core::RuntimeType for AppBarClosedDisplayMode {
+    const SIGNATURE: windows_core::imp::ConstBuffer = windows_core::imp::ConstBuffer::from_slice(
+        b"enum(Microsoft.UI.Xaml.Controls.AppBarClosedDisplayMode;i4)",
+    );
+}
 #[repr(transparent)]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct AppBarSeparator(windows_core::IUnknown);
@@ -2197,10 +2232,37 @@ impl CommandBar {
             .and_then(|| windows_core::imp::Type::from_abi(result__))
         })
     }
+    pub(crate) fn DefaultLabelPositionProperty() -> windows_core::Result<DependencyProperty> {
+        Self::ICommandBarStatics(|this| unsafe {
+            let mut result__ = core::mem::zeroed();
+            (windows_core::Interface::vtable(this).DefaultLabelPositionProperty)(
+                windows_core::Interface::as_raw(this),
+                &mut result__,
+            )
+            .and_then(|| windows_core::imp::Type::from_abi(result__))
+        })
+    }
+    pub(crate) fn OverflowButtonVisibilityProperty() -> windows_core::Result<DependencyProperty> {
+        Self::ICommandBarStatics(|this| unsafe {
+            let mut result__ = core::mem::zeroed();
+            (windows_core::Interface::vtable(this).OverflowButtonVisibilityProperty)(
+                windows_core::Interface::as_raw(this),
+                &mut result__,
+            )
+            .and_then(|| windows_core::imp::Type::from_abi(result__))
+        })
+    }
     fn ICommandBarFactory<R, F: FnOnce(&ICommandBarFactory) -> windows_core::Result<R>>(
         callback: F,
     ) -> windows_core::Result<R> {
         static SHARED: windows_core::imp::FactoryCache<CommandBar, ICommandBarFactory> =
+            windows_core::imp::FactoryCache::new();
+        SHARED.call(callback)
+    }
+    fn ICommandBarStatics<R, F: FnOnce(&ICommandBarStatics) -> windows_core::Result<R>>(
+        callback: F,
+    ) -> windows_core::Result<R> {
+        static SHARED: windows_core::imp::FactoryCache<CommandBar, ICommandBarStatics> =
             windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
@@ -2224,6 +2286,22 @@ impl windows_core::RuntimeName for CommandBar {
 }
 unsafe impl Send for CommandBar {}
 unsafe impl Sync for CommandBar {}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CommandBarDefaultLabelPosition(pub i32);
+impl CommandBarDefaultLabelPosition {
+    pub const Bottom: Self = Self(0);
+    pub const Right: Self = Self(1);
+    pub const Collapsed: Self = Self(2);
+}
+impl windows_core::imp::TypeKind for CommandBarDefaultLabelPosition {
+    type TypeKind = windows_core::imp::CopyType;
+}
+impl windows_core::RuntimeType for CommandBarDefaultLabelPosition {
+    const SIGNATURE: windows_core::imp::ConstBuffer = windows_core::imp::ConstBuffer::from_slice(
+        b"enum(Microsoft.UI.Xaml.Controls.CommandBarDefaultLabelPosition;i4)",
+    );
+}
 #[repr(transparent)]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CommandBarFlyout(windows_core::IUnknown);
@@ -2276,6 +2354,22 @@ impl windows_core::RuntimeName for CommandBarFlyout {
 }
 unsafe impl Send for CommandBarFlyout {}
 unsafe impl Sync for CommandBarFlyout {}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CommandBarOverflowButtonVisibility(pub i32);
+impl CommandBarOverflowButtonVisibility {
+    pub const Auto: Self = Self(0);
+    pub const Visible: Self = Self(1);
+    pub const Collapsed: Self = Self(2);
+}
+impl windows_core::imp::TypeKind for CommandBarOverflowButtonVisibility {
+    type TypeKind = windows_core::imp::CopyType;
+}
+impl windows_core::RuntimeType for CommandBarOverflowButtonVisibility {
+    const SIGNATURE: windows_core::imp::ConstBuffer = windows_core::imp::ConstBuffer::from_slice(
+        b"enum(Microsoft.UI.Xaml.Controls.CommandBarOverflowButtonVisibility;i4)",
+    );
+}
 #[repr(transparent)]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct CompositionObject(windows_core::IUnknown);
@@ -5414,6 +5508,25 @@ pub struct IAppBarSeparatorFactory_Vtbl {
     ) -> windows_core::HRESULT,
 }
 windows_core::imp::define_interface!(
+    IAppBarStatics,
+    IAppBarStatics_Vtbl,
+    0x0dc7172c_a03d_5ae4_9538_ffd804823bce
+);
+impl windows_core::RuntimeType for IAppBarStatics {
+    const SIGNATURE: windows_core::imp::ConstBuffer =
+        windows_core::imp::ConstBuffer::for_interface::<Self>();
+}
+#[repr(C)]
+pub struct IAppBarStatics_Vtbl {
+    pub base__: windows_core::IInspectable_Vtbl,
+    IsOpenProperty: usize,
+    IsStickyProperty: usize,
+    pub ClosedDisplayModeProperty: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
+}
+windows_core::imp::define_interface!(
     IAppWindow,
     IAppWindow_Vtbl,
     0xcfa788b3_643b_5c5e_ad4e_321d48a82acd
@@ -8099,6 +8212,30 @@ pub struct ICommandBarFlyoutFactory_Vtbl {
         *mut core::ffi::c_void,
         *mut core::ffi::c_void,
         *mut *mut core::ffi::c_void,
+        *mut *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
+}
+windows_core::imp::define_interface!(
+    ICommandBarStatics,
+    ICommandBarStatics_Vtbl,
+    0x4ed65848_4c67_588f_9666_11ff56d76f02
+);
+impl windows_core::RuntimeType for ICommandBarStatics {
+    const SIGNATURE: windows_core::imp::ConstBuffer =
+        windows_core::imp::ConstBuffer::for_interface::<Self>();
+}
+#[repr(C)]
+pub struct ICommandBarStatics_Vtbl {
+    pub base__: windows_core::IInspectable_Vtbl,
+    PrimaryCommandsProperty: usize,
+    SecondaryCommandsProperty: usize,
+    CommandBarOverflowPresenterStyleProperty: usize,
+    pub DefaultLabelPositionProperty: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
+        *mut *mut core::ffi::c_void,
+    ) -> windows_core::HRESULT,
+    pub OverflowButtonVisibilityProperty: unsafe extern "system" fn(
+        *mut core::ffi::c_void,
         *mut *mut core::ffi::c_void,
     ) -> windows_core::HRESULT,
 }

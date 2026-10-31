@@ -3382,6 +3382,17 @@ impl GeneratedHandle {
                 native::TeachingTip::CloseButtonContentProperty,
                 Conversion::Value,
             ),
+            (ObjectType::CommandBar, PropertyId::DefaultLabelPosition) => (
+                native::CommandBar::DefaultLabelPositionProperty,
+                Conversion::Value,
+            ),
+            (ObjectType::CommandBar, PropertyId::OverflowButtonVisibility) => (
+                native::CommandBar::OverflowButtonVisibilityProperty,
+                Conversion::Value,
+            ),
+            (ObjectType::CommandBar, PropertyId::ClosedDisplayMode) => {
+                (native::AppBar::ClosedDisplayModeProperty, Conversion::Value)
+            }
             (ObjectType::AppBarButton, PropertyId::Label) => {
                 (native::AppBarButton::LabelProperty, Conversion::Value)
             }
@@ -3525,6 +3536,13 @@ impl GeneratedHandle {
     }
     fn box_enum(kind: &str, variant: &str) -> IInspectable {
         match kind {
+            "AppBarClosedDisplayMode" => windows_reference::IReference::from(match variant {
+                "Compact" => native::AppBarClosedDisplayMode::Compact,
+                "Minimal" => native::AppBarClosedDisplayMode::Minimal,
+                "Hidden" => native::AppBarClosedDisplayMode::Hidden,
+                _ => unreachable!("validated enum variant"),
+            })
+            .into(),
             "AutomationHeadingLevel" => windows_reference::IReference::from(match variant {
                 "None" => native::AutomationHeadingLevel::None,
                 "Level1" => native::AutomationHeadingLevel::Level1,
@@ -3546,6 +3564,24 @@ impl GeneratedHandle {
                 _ => unreachable!("validated enum variant"),
             })
             .into(),
+            "CommandBarDefaultLabelPosition" => {
+                windows_reference::IReference::from(match variant {
+                    "Bottom" => native::CommandBarDefaultLabelPosition::Bottom,
+                    "Right" => native::CommandBarDefaultLabelPosition::Right,
+                    "Collapsed" => native::CommandBarDefaultLabelPosition::Collapsed,
+                    _ => unreachable!("validated enum variant"),
+                })
+                .into()
+            }
+            "CommandBarOverflowButtonVisibility" => {
+                windows_reference::IReference::from(match variant {
+                    "Auto" => native::CommandBarOverflowButtonVisibility::Auto,
+                    "Visible" => native::CommandBarOverflowButtonVisibility::Visible,
+                    "Collapsed" => native::CommandBarOverflowButtonVisibility::Collapsed,
+                    _ => unreachable!("validated enum variant"),
+                })
+                .into()
+            }
             "ContentDialogButton" => windows_reference::IReference::from(match variant {
                 "None" => native::ContentDialogButton::None,
                 "Primary" => native::ContentDialogButton::Primary,
