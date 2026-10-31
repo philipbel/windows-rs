@@ -445,7 +445,7 @@ impl RecordingAdapter {
                     if self
                         .objects
                         .get(object)
-                        .is_none_or(|object| object.kind != ObjectType::TitleBar)
+                        .is_none()
                     {
                         return Err(AdapterError::InvalidWindowTitleBar(*object));
                     }

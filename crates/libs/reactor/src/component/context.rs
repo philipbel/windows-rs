@@ -310,6 +310,26 @@ impl<C: Component> ViewContext<'_, C> {
             .into()
     }
 
+    #[must_use]
+    pub fn window_title_bar(&self, control: impl Into<View>, height: WindowTitleBarHeight) -> View {
+        fn apply(node: &mut DeclaredNode, height: WindowTitleBarHeight) {
+            match node {
+                DeclaredNode::Component { .. } => {
+                    panic!("A Component cannot be used as a title bar")
+                },
+                DeclaredNode::Provider(provider) => {
+                    apply(&mut provider.child, height) // Recurse
+                },
+                DeclaredNode::Object(declaration) => {
+                    declaration.window_title_bar_height = Some(height);
+                }
+            }
+        }
+        let mut view = control.into();
+        apply(&mut view.0, height);
+        view
+    }
+
     pub fn window_visuals(&mut self, visuals: WindowVisuals) {
         let previous = self.window.visuals.replace(visuals);
         assert!(previous.is_none(), "window visuals declared more than once");

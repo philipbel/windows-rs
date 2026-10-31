@@ -137,7 +137,7 @@ impl RetainedGraph {
             || (compare_key && current.key != declaration.key)
             || current.reference != declaration.reference
             || current.exit_transition != declaration.exit_transition
-            || current.window_title_bar != declaration.window_title_bar
+            || current.window_title_bar_height != declaration.window_title_bar_height
             || current.properties.as_slice() != declaration.properties.as_slice()
             || retained_events(&current.events) != declaration.events.as_slice()
             // A baseline for a declared property records an unsettled departure; the update

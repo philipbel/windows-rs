@@ -1762,7 +1762,7 @@ pub(crate) struct Declaration {
     pub component: Option<ComponentId>,
     pub reference: Option<ElementRef>,
     pub exit_transition: Option<ExitTransition>,
-    pub window_title_bar: Option<WindowTitleBarHeight>,
+    pub window_title_bar_height: Option<WindowTitleBarHeight>,
     pub attachments: Option<Box<DeclaredAttachments>>,
     pub properties: SharedList<Property>,
     pub events: SharedList<Event>,
@@ -2049,7 +2049,7 @@ impl Declaration {
             component: None,
             reference: None,
             exit_transition: None,
-            window_title_bar: None,
+            window_title_bar_height: None,
             attachments: None,
             properties: SharedList::Empty,
             events: SharedList::Empty,
@@ -2072,7 +2072,7 @@ impl Declaration {
     }
 
     fn window_title_bar(mut self, height: WindowTitleBarHeight) -> Self {
-        self.window_title_bar = Some(height);
+        self.window_title_bar_height = Some(height);
         self
     }
 
@@ -2436,7 +2436,7 @@ macro_rules! reference_methods {
 macro_rules! window_title_bar_methods {
     () => {
         pub fn preferred_height(mut self, height: WindowTitleBarHeight) -> Self {
-            self.0.window_title_bar = Some(height);
+            self.0.window_title_bar_height = Some(height);
             self
         }
     };

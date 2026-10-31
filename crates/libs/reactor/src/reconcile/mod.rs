@@ -346,7 +346,7 @@ struct RetainedObject {
     key: Option<Key>,
     reference: Option<ElementRef>,
     exit_transition: Option<ExitTransition>,
-    window_title_bar: Option<WindowTitleBarHeight>,
+    window_title_bar_height: Option<WindowTitleBarHeight>,
     attachments: Option<Box<RetainedAttachments>>,
     properties: SharedList<Property>,
     /// The values observations are compared against where `properties` does not hold them: the

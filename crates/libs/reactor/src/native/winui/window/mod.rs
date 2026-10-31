@@ -544,9 +544,6 @@ impl WinUiAdapter {
         object: ObjectId,
         height: WindowTitleBarHeight,
     ) -> Result<(), WinUiError> {
-        if self.kind(object)? != ObjectType::TitleBar {
-            return Err(WinUiError::InvalidObject(object));
-        }
         let element = self.ui_element(object)?;
         element.SetIsTabStop(false)?;
         state.window.SetExtendsContentIntoTitleBar(true)?;
@@ -595,9 +592,6 @@ impl WinUiAdapter {
         object: ObjectId,
         height: WindowTitleBarHeight,
     ) -> Result<(), WinUiError> {
-        if self.kind(object)? != ObjectType::TitleBar {
-            return Err(WinUiError::InvalidObject(object));
-        }
         self.window_title_bar = Some((object, height));
         Ok(())
     }

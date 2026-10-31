@@ -278,7 +278,7 @@ impl Planner<'_> {
         if self
             .retained
             .get_mut(object)
-            .window_title_bar
+            .window_title_bar_height
             .take()
             .is_some()
         {
@@ -381,7 +381,7 @@ impl Planner<'_> {
                     clear: events.iter().map(|event| event.id).collect(),
                 });
             }
-            if retained.window_title_bar.take().is_some() {
+            if retained.window_title_bar_height.take().is_some() {
                 self.retained.clear_window_title_bar(*object);
                 self.mutations
                     .push(Mutation::ClearWindowTitleBar { object: *object });

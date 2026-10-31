@@ -5,7 +5,7 @@ impl Planner<'_> {
         if self
             .retained
             .get_mut(object)
-            .window_title_bar
+            .window_title_bar_height
             .take()
             .is_some()
         {
@@ -68,7 +68,7 @@ impl Planner<'_> {
             key,
             reference: declaration.reference.clone(),
             exit_transition: declaration.exit_transition,
-            window_title_bar: declaration.window_title_bar,
+            window_title_bar_height: declaration.window_title_bar_height,
             attachments: None,
             properties: declaration.properties.clone(),
             baselines: Vec::new(),
@@ -115,7 +115,7 @@ impl Planner<'_> {
             self.mount_relation(object, declaration, contract);
         }
         self.apply_index(object, declaration, None, false);
-        if let Some(height) = declaration.window_title_bar {
+        if let Some(height) = declaration.window_title_bar_height {
             self.retained.set_window_title_bar(object, height);
             self.mutations
                 .push(Mutation::SetWindowTitleBar { object, height });
@@ -135,7 +135,7 @@ impl Planner<'_> {
             key: declaration.key.clone(),
             reference: declaration.reference.clone(),
             exit_transition: declaration.exit_transition,
-            window_title_bar: declaration.window_title_bar,
+            window_title_bar_height: declaration.window_title_bar_height,
             attachments: None,
             properties: declaration.properties.clone(),
             baselines: Vec::new(),
@@ -152,7 +152,7 @@ impl Planner<'_> {
                 .collect(),
             virtual_items,
         });
-        if let Some(height) = declaration.window_title_bar {
+        if let Some(height) = declaration.window_title_bar_height {
             self.retained.set_window_title_bar(object, height);
         }
         if let Some(reference) = &declaration.reference {
@@ -191,7 +191,7 @@ impl Planner<'_> {
             self.mount_relation(object, declaration, contract);
         }
         self.apply_index(object, declaration, None, false);
-        if let Some(height) = declaration.window_title_bar {
+        if let Some(height) = declaration.window_title_bar_height {
             self.mutations
                 .push(Mutation::SetWindowTitleBar { object, height });
         }
@@ -229,9 +229,9 @@ impl Planner<'_> {
         if self.retained.get(object).unwrap().exit_transition != declaration.exit_transition {
             self.retained.get_mut(object).exit_transition = declaration.exit_transition;
         }
-        let previous_title_bar = self.retained.get(object).unwrap().window_title_bar;
-        if previous_title_bar != declaration.window_title_bar {
-            match (previous_title_bar, declaration.window_title_bar) {
+        let previous_title_bar_height = self.retained.get(object).unwrap().window_title_bar_height;
+        if previous_title_bar_height != declaration.window_title_bar_height {
+            match (previous_title_bar_height, declaration.window_title_bar_height) {
                 (Some(_), None) => {
                     self.retained.clear_window_title_bar(object);
                     self.mutations
@@ -244,7 +244,7 @@ impl Planner<'_> {
                 }
                 (None, None) => {}
             }
-            self.retained.get_mut(object).window_title_bar = declaration.window_title_bar;
+            self.retained.get_mut(object).window_title_bar_height = declaration.window_title_bar_height;
         }
         if self.retained.get(object).unwrap().attachments.is_some()
             || declaration.attachments.is_some()
